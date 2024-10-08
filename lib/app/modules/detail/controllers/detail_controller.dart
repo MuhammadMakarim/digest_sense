@@ -20,49 +20,79 @@ class DetailController extends GetxController {
 
   late Timer _timer;
 
-  int scaleValue(int value, int inMin, int inMax, int outMin, int outMax) {
-    return (((value - inMin) * (outMax - outMin)) ~/ (inMax - inMin)) + outMin;
+  double scaleValue(double value, double inMin, double inMax, double outMin, double outMax) {
+    return (((value - inMin) * (outMax - outMin)) / (inMax - inMin)) + outMin;
   }
 
   Future<void> getData() async {
     try {
       DatabaseReference _databaseReference = FirebaseDatabase.instanceFor(
-              app: Firebase.app(),
-              databaseURL:
-                  'https://smartgarden-12d50-default-rtdb.asia-southeast1.firebasedatabase.app')
+          app: Firebase.app(),
+          databaseURL:
+          'https://smartgarden-12d50-default-rtdb.asia-southeast1.firebasedatabase.app')
           .ref("plant");
       final snapshot = await _databaseReference.get();
       if (snapshot.exists) {
         Map<String, dynamic> _snapshotValue =
-            Map<String, dynamic>.from(snapshot.value as Map);
-        int value_ultra = 0;
+        Map<String, dynamic>.from(snapshot.value as Map);
+        double value_ultra = 0;
 
         if (_snapshotValue['ultra'] > 10) {
           value_ultra = 0;
         } else {
-          value_ultra = scaleValue(_snapshotValue['ultra'], 0, 9, 0, 100);
+          double valueUltra = scaleValue(_snapshotValue['ultra'].toDouble(), 0, 9, 0, 100);
+          data.value = valueUltra;
         }
 
-        data.value = value_ultra as double;
-        data_temperature.value = _snapshotValue['temperature'];
+        data.value = value_ultra;
 
-        int scaledValue = scaleValue(_snapshotValue['volume'], 0, 4095, 0, 100);
-        data_volume.value = scaledValue as double;
+        if (_snapshotValue['temperature'] != null) {
+          data_temperature.value = _snapshotValue['temperature'].toDouble();
+        } else {
+          data_temperature.value = 0.0;
+        }
+
+        if (_snapshotValue['volume'] != null) {
+          double scaledValue = scaleValue(_snapshotValue['volume'].toDouble(), 0, 4095, 0, 100);
+          data_volume.value = scaledValue;
+        } else {
+          data_volume.value = 0.0;
+        }
 
         // Data tekanan
-        data_tekanan.value = (_snapshotValue['tekanan'] as num) as double;
+        if (_snapshotValue['tekanan'] != null) {
+          data_tekanan.value = _snapshotValue['tekanan'].toDouble();
+        } else {
+          data_tekanan.value = 0.0;
+        }
 
         // Data H2S
-        data_h2s.value = (_snapshotValue['h2s'] as num) as double;
+        if (_snapshotValue['h2s'] != null) {
+          data_h2s.value = _snapshotValue['h2s'].toDouble();
+        } else {
+          data_h2s.value = 0.0;
+        }
 
         // Data CO2
-        data_co2.value = (_snapshotValue['co2'] as num) as double;
+        if (_snapshotValue['co2'] != null) {
+          data_co2.value = _snapshotValue['co2'].toDouble();
+        } else {
+          data_co2.value = 0.0;
+        }
 
         // Data CH4
-        data_ch4.value = (_snapshotValue['ch4'] as num) as double;
+        if (_snapshotValue['ch4'] != null) {
+          data_ch4.value = _snapshotValue['ch4'].toDouble();
+        } else {
+          data_ch4.value = 0.0;
+        }
 
         // Data pH
-        data_ph.value = (_snapshotValue['ph'] as num) as double;
+        if (_snapshotValue['ph'] != null) {
+          data_ph.value = _snapshotValue['ph'].toDouble();
+        } else {
+          data_ph.value = 0.0;
+        }
 
         print(_snapshotValue);
       } else {
@@ -72,6 +102,7 @@ class DetailController extends GetxController {
       rethrow;
     }
   }
+
 
   final count = 0.obs;
   @override

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controllers/kalkulator_controller.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class KalkulatorView extends GetView<KalkulatorController> {
   const KalkulatorView({Key? key}) : super(key: key);
@@ -11,89 +10,111 @@ class KalkulatorView extends GetView<KalkulatorController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Kalkulator Biogas", style: GoogleFonts.lato()),
+        title: Text(
+          "Kalkulator Biogas",
+          style: GoogleFonts.lato(),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            Text(
-              "Kalkulasi Potensi Biogas",
-              style: GoogleFonts.lato(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 20),
-            // Input fields
-            TextField(
-              onChanged: (value) {
-                controller.workingVolume.value = double.tryParse(value) ?? 40.0;
-              },
-              decoration: InputDecoration(
-                labelText: "Working Volume (ml)",
-                border: OutlineInputBorder(),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildTitle(),
+              const SizedBox(height: 20),
+              _buildInputField(
+                label: "Working Volume (ml)",
+                onChanged: (value) {
+                  controller.workingVolume.value =
+                      double.tryParse(value) ?? 40.0;
+                },
               ),
-              keyboardType: TextInputType.number,
-            ),
-            SizedBox(height: 20),
-            TextField(
-              onChanged: (value) {
-                controller.suhu.value = double.tryParse(value) ?? 37.0;
-              },
-              decoration: InputDecoration(
-                labelText: "Suhu (°C)",
-                border: OutlineInputBorder(),
+              const SizedBox(height: 20),
+              _buildInputField(
+                label: "Suhu (°C)",
+                onChanged: (value) {
+                  controller.suhu.value = double.tryParse(value) ?? 37.0;
+                },
               ),
-              keyboardType: TextInputType.number,
-            ),
-            SizedBox(height: 20),
-            TextField(
-              onChanged: (value) {
-                controller.pH.value = double.tryParse(value) ?? 7.7;
-              },
-              decoration: InputDecoration(
-                labelText: "pH",
-                border: OutlineInputBorder(),
+              const SizedBox(height: 20),
+              _buildInputField(
+                label: "pH",
+                onChanged: (value) {
+                  controller.pH.value = double.tryParse(value) ?? 7.7;
+                },
               ),
-              keyboardType: TextInputType.number,
-            ),
-            SizedBox(height: 20),
-            TextField(
-              onChanged: (value) {
-                controller.avgTS.value = double.tryParse(value) ?? 13.71;
-              },
-              decoration: InputDecoration(
-                labelText: "Average TS (g TS/kg WW)",
-                border: OutlineInputBorder(),
+              const SizedBox(height: 20),
+              _buildInputField(
+                label: "Average TS (g TS/kg WW)",
+                onChanged: (value) {
+                  controller.avgTS.value = double.tryParse(value) ?? 13.71;
+                },
               ),
-              keyboardType: TextInputType.number,
-            ),
-            SizedBox(height: 20),
-            TextField(
-              onChanged: (value) {
-                controller.avgVS.value = double.tryParse(value) ?? 0.0087;
-              },
-              decoration: InputDecoration(
-                labelText: "Average VS (kg VS/kg WW)",
-                border: OutlineInputBorder(),
+              const SizedBox(height: 20),
+              _buildInputField(
+                label: "Average VS (kg VS/kg WW)",
+                onChanged: (value) {
+                  controller.avgVS.value = double.tryParse(value) ?? 0.0087;
+                },
               ),
-              keyboardType: TextInputType.number,
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                controller.calculate();
-              },
-              child: Text("Hitung Potensi CH4"),
-            ),
-            SizedBox(height: 20),
-            Obx(() {
-              return Text(
-                "Potensi CH4: ${controller.m3CH4.value.toStringAsFixed(3)} m3/kg VS",
-                style: GoogleFonts.lato(fontSize: 20, fontWeight: FontWeight.bold),
-              );
-            }),
-          ],
+              const SizedBox(height: 20),
+              _buildCalculateButton(),
+              const SizedBox(height: 20),
+              _buildResult(),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  // Builds the title widget with larger text
+  Widget _buildTitle() {
+    return Text(
+      "Kalkulasi Potensi Biogas",
+      style: GoogleFonts.lato(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  // Reusable input field widget to avoid code duplication
+  Widget _buildInputField({
+    required String label,
+    required Function(String) onChanged,
+  }) {
+    return TextField(
+      onChanged: onChanged,
+      decoration: InputDecoration(
+        labelText: label,
+        border: OutlineInputBorder(),
+      ),
+      keyboardType: TextInputType.number,
+    );
+  }
+
+  // Button to trigger the calculation
+  Widget _buildCalculateButton() {
+    return ElevatedButton(
+      onPressed: () {
+        controller.calculate();  // Calls the controller method to perform the calculation
+      },
+      child: Text("Hitung Potensi CH4"),
+    );
+  }
+
+  // Displays the result of the calculation
+  Widget _buildResult() {
+    return Obx(() {
+      return Text(
+        "Potensi CH4: ${controller.m3CH4.value.toStringAsFixed(3)} m3/kg VS",
+        style: GoogleFonts.lato(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      );
+    });
   }
 }
