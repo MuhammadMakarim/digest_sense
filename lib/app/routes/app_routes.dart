@@ -7,6 +7,7 @@ abstract class Routes {
   static const SPLASH_SCREEN = _Paths.SPLASH_SCREEN;
   static const DETAIL = _Paths.DETAIL;
   static const SCHEDULE = _Paths.SCHEDULE;
+  static const KALKULATOR = _Paths.KALKULATOR;
 }
 
 abstract class _Paths {
@@ -15,4 +16,5 @@ abstract class _Paths {
   static const SPLASH_SCREEN = '/splash-screen';
   static const DETAIL = '/detail';
   static const SCHEDULE = '/schedule';
+  static const KALKULATOR = '/kalkulator';
 }

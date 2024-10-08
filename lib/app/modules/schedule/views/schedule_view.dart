@@ -15,7 +15,7 @@ class ScheduleView extends GetView<ScheduleController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Watering Schedule'),
+          title: const Text('Actuator Schedule'),
           centerTitle: true,
         ),
         body: Column(
@@ -27,7 +27,7 @@ class ScheduleView extends GetView<ScheduleController> {
                   backgroundColor: const Color(0xff569033),
                   child: Icon(Icons.calendar_month),
                 ),
-                title: Text('Watering Schedule'),
+                title: Text('Actuator Schedule'),
                 subtitle: Obx(() => Text(
                     'Everyday ${controller.time.value.hour}:${controller.time.value.minute}')),
                 trailing: TextButton(
@@ -76,7 +76,7 @@ class ScheduleView extends GetView<ScheduleController> {
                             ),
                           ),
                           Text(
-                            'Watering Now',
+                            'Turn On Now',
                             style: TextStyle(fontSize: 25, color: Colors.white),
                           ),
                         ],
@@ -88,7 +88,7 @@ class ScheduleView extends GetView<ScheduleController> {
                               return AlertDialog(
                                 title: Text('Information'),
                                 content: const Text(
-                                    'Are you sure want to a watering a plant now?'),
+                                    'Are you sure want to turn on actuator now?'),
                                 actions: [
                                   TextButton(
                                       onPressed: Navigator.of(context).pop,
@@ -128,7 +128,7 @@ class ScheduleView extends GetView<ScheduleController> {
               children: [
                 CircularProgressIndicator(),
                 SizedBox(height: 20),
-                Text("Watering a plant ..."),
+                Text("Turn on actuator ..."),
               ],
             ),
           ),

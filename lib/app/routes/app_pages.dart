@@ -4,6 +4,8 @@ import '../modules/detail/bindings/detail_binding.dart';
 import '../modules/detail/views/detail_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/kalkulator/bindings/kalkulator_binding.dart';
+import '../modules/kalkulator/views/kalkulator_view.dart';
 import '../modules/schedule/bindings/schedule_binding.dart';
 import '../modules/schedule/views/schedule_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
@@ -27,6 +29,11 @@ class AppPages {
       name: _Paths.SPLASH_SCREEN,
       page: () => const SplashScreenView(),
       binding: SplashScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.KALKULATOR,
+      page: () => const KalkulatorView(),
+      binding: KalkulatorBinding(),
     ),
     GetPage(
       name: _Paths.DETAIL,

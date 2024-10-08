@@ -324,7 +324,7 @@ class DetailView extends GetView<DetailController> {
                             leading: Image(image: AssetImage(
                                 'images/clock.png')),
                             title: Text(
-                              'Plant Watering',
+                              'Actuator Schedule',
                               style: GoogleFonts.lexend(fontSize: 18),
                             ),
                             trailing: IconButton(

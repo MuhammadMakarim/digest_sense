@@ -46,11 +46,11 @@ class ScheduleController extends GetxController {
             app: Firebase.app(),
             databaseURL:
                 'https://smartgarden-12d50-default-rtdb.asia-southeast1.firebasedatabase.app')
-        .ref("plant");
+        .ref("biogas");
 
 // Only update the name, leave the age and address!
     _databaseReference.update({
-      'isWatering': true,
+      'isON': true,
     });
 
     Future.delayed(Duration(seconds: 5), () {
@@ -75,7 +75,7 @@ class ScheduleController extends GetxController {
 
 // Only update the name, leave the age and address!
     _databaseReference.update({
-      'isWatering': false,
+      'isON': false,
     });
 
     // Future.delayed(Duration(seconds: 5), () {
@@ -108,7 +108,7 @@ class ScheduleController extends GetxController {
 
     if (now.hour == time.value.hour && now.minute == time.value.minute) {
       // Time matches, perform the desired action
-      print('Time matches! Performing action Watering');
+      print('Time matches! Performing action Actuator');
       startWatering();
       _timer?.cancel(); // Example action
     }

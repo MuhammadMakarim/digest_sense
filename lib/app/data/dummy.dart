@@ -1,22 +1,22 @@
 final data = [
   {
-    'image': 'images/image 3.png',
-    'title': 'Bunga Mawar',
+    'image': 'images/logo_digester.png',
+    'title': 'Biogester 1',
     'date': 'March 2, 2024'
   },
   {
-    'image': 'images/image 4.png',
-    'title': 'Bunga Melati',
+    'image': 'images/logo_digester.png',
+    'title': 'Biogester 2',
     'date': 'January 24, 2024'
   },
   {
-    'image': 'images/image 5.png',
-    'title': 'Peperomia Houseplant',
+    'image': 'images/logo_digester.png',
+    'title': 'Biogester 3',
     'date': 'January 16, 2024'
   },
   {
-    'image': 'images/image 6.png',
-    'title': 'Crassula Houseplant',
+    'image': 'images/logo_digester.png',
+    'title': 'Biogester 4',
     'date': 'February 24, 2024'
   },
 ];
