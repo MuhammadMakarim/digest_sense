@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "452475157576",
+    "project_id": "smartgarden-12d50",
+    "storage_bucket": "smartgarden-12d50.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452475157576:android:51e3429c2d1d8dc25aec7d",
+        "android_client_info": {
+          "package_name": "ivanrafli.com.plant_monitoring"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDnXWfDpUaRpdRgox-_9htUn_D6iyZL4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
